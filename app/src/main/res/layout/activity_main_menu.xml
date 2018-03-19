@@ -30,12 +30,12 @@
             android:text="@string/btn_profile"
             android:textColor="@android:color/black" />
         <Button
-            android:id="@+id/map_button"
+            android:id="@+id/GenRoute_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dip"
             android:background="@color/colorAccent"
-            android:text="@string/btn_map"
+            android:text="@string/btn_GenRoute"
             android:textColor="@android:color/black" />
         <Button
             android:id="@+id/settings_button"

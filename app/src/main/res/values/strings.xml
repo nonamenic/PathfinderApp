@@ -47,7 +47,7 @@
 
     <!-- Strings needed for main menu -->
     <string name="btn_profile">Profile</string>
-    <string name="btn_map">Map</string>
+    <string name="btn_GenRoute">Generate Route</string>
     <string name="btn_setting">Settings</string>
 
 </resources>
