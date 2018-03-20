@@ -44,10 +44,14 @@
     <string name="btn_sign_out">Sign Out</string>
     <string name="lbl_forgot_password">Forgot password?</string>
     <string name="forgot_password_msg">We just need your registered Email Id to sent you password reset instructions.</string>
-
+    <string name="btn_mainMenu">Main Menu</string>
     <!-- Strings needed for main menu -->
     <string name="btn_profile">Profile</string>
     <string name="btn_GenRoute">Generate Route</string>
     <string name="btn_setting">Settings</string>
 
+    <!-- Strings for Generate Route -->
+    <string name="btn_start">Start Run</string>
+    <string name="btn_stop">Stop Timer</string>
+    <string name="hint_distance">Distance</string>
 </resources>

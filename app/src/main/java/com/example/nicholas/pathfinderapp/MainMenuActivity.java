@@ -23,7 +23,7 @@ public class MainMenuActivity extends AppCompatActivity {
         btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainMenuActivity.this, MainActivity.class);
+                Intent intent = new Intent(MainMenuActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -31,15 +31,8 @@ public class MainMenuActivity extends AppCompatActivity {
         btnGenRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*Intent intent = new Intent(MainMenuActivity.this, MapActivity.class);
+                Intent intent = new Intent(MainMenuActivity.this, GenerateRouteActivity.class);
                 startActivity(intent);
-                finish();*/
-
-                Uri gmmIntentUri = Uri.parse("https://www.google.com/maps/dir/?api=1&origin=Paris,France&destination=Cherbourg,France&travelmode=driving&waypoints=Versailles,France%7CChartres,France%7CLe+Mans,France%7CCaen,France");
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW);
-                mapIntent.setData(gmmIntentUri);
-                startActivity(mapIntent);
-
             }
         });
 

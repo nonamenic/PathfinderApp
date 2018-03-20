@@ -27,8 +27,9 @@
         <activity android:name=".SecondActivity" />
         <activity android:name=".SignupActivity" />
         <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".MainActivity" />
-        <activity android:name=".MainMenuActivity"></activity>
+        <activity android:name=".ProfileActivity" />
+        <activity android:name=".MainMenuActivity" />
+        <activity android:name=".GenerateRouteActivity"></activity>
     </application>
 
 </manifest>
