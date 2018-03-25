@@ -52,6 +52,9 @@
 
     <!-- Strings for Generate Route -->
     <string name="btn_start">Start Run</string>
-    <string name="btn_stop">Stop Timer</string>
-    <string name="hint_distance">Distance</string>
+    <string name="btn_stop">Stop and Save</string>
+    <string name="pickDistance">Please pick a distance range below.</string>
+    <string name="OneToThreeMiles">1 to 3 miles</string>
+    <string name="FiveToTenMiles">5 to 10 miles</string>
+    <string name="ElevenToFifteenMiles">11 to 15 miles</string>
 </resources>

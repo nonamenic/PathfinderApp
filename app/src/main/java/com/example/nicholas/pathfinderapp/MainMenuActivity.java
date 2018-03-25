@@ -4,12 +4,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
 public class MainMenuActivity extends AppCompatActivity {
 
     private Button btnProfile, btnSettings, btnGenRoute;
+    private final String TAG = "MainMenuActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,7 @@ public class MainMenuActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainMenuActivity.this, GenerateRouteActivity.class);
+                Log.d(TAG, "before start activity", new Exception());
                 startActivity(intent);
             }
         });
