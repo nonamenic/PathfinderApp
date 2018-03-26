@@ -46,8 +46,6 @@ public class RunnerStats {
         return mUser;
     }
 
-    //TODO figure a way to convert long into int
-    //TODO convert milliseconds into seconds and then seconds into minutes...
     public void setHours(int hours) {
         mHours = hours;
     }

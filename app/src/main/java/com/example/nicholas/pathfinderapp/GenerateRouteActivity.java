@@ -14,6 +14,7 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.firebase.database.ChildEventListener;
@@ -26,12 +27,13 @@ import java.util.ArrayList;
 
 public class GenerateRouteActivity extends AppCompatActivity {
 
-    private Button btnStart, btnStop, btnSmallRun, btnMediumRun;
+    private Button btnStart, btnStop, btnSmallRun, btnMediumRun, btnSmallRunKm, btnMediumRunKm, btnSubmit;
     private ImageButton btnMainMenu;
     private Chronometer stopWatch;
     private int mLowDistance;
     private DatabaseReference runnerDataBase;
     private Controller mController = Controller.getSoleInstance();
+    private Switch kmMileSwitch;
     private final String TAG = "GenerateRouteActivity";
 
     @Override
@@ -47,7 +49,32 @@ public class GenerateRouteActivity extends AppCompatActivity {
         btnStop = (Button) findViewById(R.id.stop_button);
         btnSmallRun = (Button) findViewById(R.id.smallRun_button);
         btnMediumRun = (Button) findViewById(R.id.mediumRun_button);
+        btnSmallRunKm = (Button) findViewById(R.id.smallRun_buttonKM);
+        btnMediumRunKm = (Button) findViewById(R.id.mediumRun_buttonKM);
         stopWatch = (Chronometer) findViewById(R.id.stop_watch);
+        kmMileSwitch = (Switch) findViewById(R.id.kmMile_switch);
+        btnSubmit = (Button) findViewById(R.id.refresh_button);
+
+        btnSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(kmMileSwitch.isChecked()){
+                    btnSmallRunKm.setVisibility(View.GONE);
+                    btnMediumRunKm.setVisibility(View.GONE);
+                    btnMediumRun.setVisibility(View.VISIBLE);
+                    btnSmallRun.setVisibility(View.VISIBLE);
+                }else{
+                    btnSmallRunKm.setVisibility(View.VISIBLE);
+                    btnMediumRunKm.setVisibility(View.VISIBLE);
+                    btnMediumRun.setVisibility(View.GONE);
+                    btnSmallRun.setVisibility(View.GONE);
+                }
+            }
+        });
+
+
+
+
 
         btnMainMenu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -57,6 +84,8 @@ public class GenerateRouteActivity extends AppCompatActivity {
                 finish();
             }
         });
+
+
 
 
         btnSmallRun.setOnClickListener(new View.OnClickListener() {
