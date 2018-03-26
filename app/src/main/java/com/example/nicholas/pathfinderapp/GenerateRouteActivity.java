@@ -34,7 +34,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.ArrayList;
 
-public class GenerateRouteActivity extends AppCompatActivity {
+public class GenerateRouteActivity extends AppCompatActivity implements LocationListener {
 
     private Button btnStart, btnStop, btnSmallRun, btnMediumRun, btnSmallRunKm, btnMediumRunKm, btnSubmit;
     private ImageButton btnMainMenu;
@@ -48,6 +48,7 @@ public class GenerateRouteActivity extends AppCompatActivity {
     private final String TAG = "GenerateRouteActivity";
     public static double lat;
     public static double lng;
+    private String URL;
     GenerateRouteClass cls = new GenerateRouteClass();
 
     @Override
@@ -70,7 +71,8 @@ public class GenerateRouteActivity extends AppCompatActivity {
            //lat = location.getLatitude();
             //lng = location.getLongitude();
             Log.d(TAG,"a;lskdjfal;skdjfalksdjfalksdjflkajsdlkfjsalkdjflksd" + lat + lng);
-            cls.genRouteMethod(40.00265226,-83.01460162);
+            //cls.genRouteMethod(40.00265226,-83.01460162);
+            URL = cls.genRouteMethod(0,0);
         }
         else{
             Toast toast = Toast.makeText(getApplicationContext(),"ERROR: No location permission given", Toast.LENGTH_LONG);

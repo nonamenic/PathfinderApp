@@ -39,7 +39,7 @@ public class GenerateRouteClass {
         con.setRequestMethod("GET");
         //add request header
         con.setRequestProperty("User-Agent", "Mozilla/5.0");
-        int responseCode = con.getResponseCode();
+        //int responseCode = con.getResponseCode();
         //System.out.println("\nSending 'GET' request to URL : " + url);
         //System.out.println("Response Code : " + responseCode);
         BufferedReader in = new BufferedReader(
@@ -52,36 +52,39 @@ public class GenerateRouteClass {
         in.close();
         //print in String
         String respString=new String(response.toString());
-        //System.out.println("\n\n"+response.toString()+"\n\n");
+        Log.d("TAG2","\n\n"+response.toString()+"\n\n");
         //Read JSON response and print
         //JSONObject myResponse = new JSONObject(response.toString());
         //System.out.println("result after Reading JSON Response");
 
-        //String distText = respString.substring(respString.indexOf("text"));
-        String newString = respString.substring(respString.indexOf("text"));
-        String newString2 = newString.substring(newString.indexOf("\"")+5);
-        int indexpace = newString2.indexOf(" ");
+        if(respString.indexOf("text")!=-1){
+            // String distText = respString.substring(respString.indexOf("text"));
+            String newString = respString.substring(respString.indexOf("text"));
+            String newString2 = newString.substring(newString.indexOf("\"")+5);
+            int indexpace = newString2.indexOf(" ");
 
-        //System.out.println(newString2.substring(0,indexpace));
+            Log.d("TAG3",newString2.substring(0,indexpace));
 
-        return  Double.parseDouble(newString2.substring(0,indexpace));
+            return  Double.parseDouble(newString2.substring(0,indexpace));
+        }
+        else{ return 0.0;}
     }
 
 
 
-    public static void genRouteMethod(double lat, double lng){
-        double currentLocationLat= lat;
-        double currentLocationLong= lng;
+    public static String genRouteMethod(double lat, double lng) {
+        double currentLocationLat=40.00265226;
+        double currentLocationLong=-83.01460162;
         double distBetweenLng=0.0;
         distBetweenLng=getDistanceBetweenLongitude(currentLocationLat);
         double distBetweenPoints=0.0;
         //System.out.println(distBetweenLng);
 
-        double routeDist=2;
+        double routeDist=8;
 /*
-miles       KM            middle mile
-1-3     1.609-4.828         2
-4-12    6.437-19.312        8
+miles KM middle mile
+1-3 1.609-4.828 2
+4-12 6.437-19.312 8
 */
 
 
@@ -96,18 +99,19 @@ miles       KM            middle mile
 
         String origin = Double.toString(currentLocationLat) + "," + Double.toString(currentLocationLong);
         String destination=Double.toString(currentLocationLat) + "," + Double.toString(currentLocationLong);
-        while ((distBetweenPoints<(routeDist/4)*.50 || distBetweenPoints>(routeDist/4)*1.50) && bringInAttempts<15)
-        {//check distance to bottom right
+        //while ((distBetweenPoints<(routeDist/4)*.50 || distBetweenPoints>(routeDist/4)*1.50) && bringInAttempts<15)
+        //{//check distance to bottom right
             rightLong=getRight((routeDist/4)*Math.pow(.6, bringInAttempts), currentLocationLong, distBetweenLng);
 
-            try {
+            /*try {
                 distBetweenPoints=checkDist(Double.toString(currentLocationLat), Double.toString(currentLocationLong), Double.toString(currentLocationLat),Double.toString(rightLong));
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
+                Log.d("TAG","while loop");
             }
             bringInAttempts++;
-        }
+        }*/
 
         bringInAttempts=0;
         distBetweenPoints=0;
@@ -115,18 +119,18 @@ miles       KM            middle mile
 
 
 
-        while ((distBetweenPoints<(routeDist/4)*.50 || distBetweenPoints>(routeDist/4)*1.50)&& bringInAttempts<15)
-        {//check distance to bottom right
+        //while ((distBetweenPoints<(routeDist/4)*.50 || distBetweenPoints>(routeDist/4)*1.50)&& bringInAttempts<15)
+        //{//check distance to bottom right
             topLat=getUpper((routeDist/4)*Math.pow(.6, bringInAttempts), currentLocationLat);
 
-            try {
-                distBetweenPoints=checkDist(Double.toString(currentLocationLat), Double.toString(rightLong), Double.toString(topLat),Double.toString(rightLong));
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
-            bringInAttempts++;
-        }
+            //try {
+            //    distBetweenPoints=GenerateRouteClass.checkDist(Double.toString(currentLocationLat), Double.toString(rightLong), Double.toString(topLat),Double.toString(rightLong));
+            //} catch (Exception e) {
+            //    // TODO Auto-generated catch block
+            //    e.printStackTrace();
+            //}
+            //bringInAttempts++;
+        //}
         bringInAttempts=0;
         distBetweenPoints=0;
         String topRight = Double.toString(topLat) + "," + Double.toString(rightLong);
@@ -135,7 +139,7 @@ miles       KM            middle mile
         double upperLeftLong=currentLocationLong;
 
         double distBetweenPoints2=0.0;
-        try {
+        /*try {
             distBetweenPoints=checkDist(Double.toString(topLat),Double.toString(rightLong), Double.toString(upperLeftLat), Double.toString(upperLeftLong));
         } catch (Exception e1) {
 // TODO Auto-generated catch block
@@ -146,33 +150,33 @@ miles       KM            middle mile
         } catch (Exception e1) {
 // TODO Auto-generated catch block
             e1.printStackTrace();
-        }
+        }*/
         bringInAttempts++;
-        while ((distBetweenPoints<(routeDist/4)*.50 || distBetweenPoints>(routeDist/4)*1.50 || distBetweenPoints2<(routeDist/4)*.50 || distBetweenPoints2>(routeDist/4)*1.50)&& bringInAttempts<15)
-        {//check distance to bottom right
+        //while ((distBetweenPoints<(routeDist/4)*.50 || distBetweenPoints>(routeDist/4)*1.50 || distBetweenPoints2<(routeDist/4)*.50 || distBetweenPoints2>(routeDist/4)*1.50)&& bringInAttempts<15)
+        //{//check distance to bottom right
             upperLeftLong=getRight((routeDist/4)*Math.pow(.6, bringInAttempts), rightLong, distBetweenLng); //rightlong just for top left point
             upperLeftLat=getUpper((routeDist/4)*Math.pow(.6, bringInAttempts), currentLocationLat);//lat only for top left point
 
-            try {
+            /*try {
                 distBetweenPoints=checkDist(Double.toString(topLat),Double.toString(rightLong), Double.toString(upperLeftLat), Double.toString(upperLeftLong));
                 distBetweenPoints2=checkDist(Double.toString(upperLeftLat), Double.toString(upperLeftLong), Double.toString(currentLocationLat), Double.toString(currentLocationLong));
 
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-            }
+            }*/
             bringInAttempts++;
-        }
+        //}
 
         String topLeft = Double.toString(upperLeftLat) + "," + Double.toString(upperLeftLong);
 
         //do not need origin if using current location for start
-        String URL="https://www.google.com/maps/dir/?api=1=";
-        URL=URL  + "&destination=" + destination +"&travelmode=walking&waypoints="+bottomRight+"%7C"+topRight+"%7C"+topLeft;
-        Log.d("TAG", URL);
+        String URL="https://www.google.com/maps/dir/?api=1&origin=";
+        URL=URL + origin + "&destination=" + destination +"&travelmode=walking&waypoints="+bottomRight+"%7C"+topRight+"%7C"+topLeft;
         //System.out.println(URL);
+        Log.d("TAG", URL);
         //https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40,-83&destinations=40.0,-82.9891618746764%7C40.007246376811594,-82.9891618746764%7C40.007246376811594,-83.0%7C40,-83&key=AIzaSyAoA1iVXsmRxn7jQae_cKIQxG4p34NMe78
-
+        return URL;
 
 
     }
