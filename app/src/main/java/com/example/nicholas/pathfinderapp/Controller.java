@@ -1,5 +1,11 @@
 package com.example.nicholas.pathfinderapp;
 
+import android.widget.ArrayAdapter;
+
+import com.google.firebase.database.DatabaseReference;
+
+import java.util.ArrayList;
+
 /**
  * Created by delgado on 3/22/18.
  */
@@ -8,6 +14,9 @@ package com.example.nicholas.pathfinderapp;
 
     private  static volatile Controller sSoleInstance;
     private String mUser;
+    private ArrayList<String> mArrayList = new ArrayList<>();
+    private ArrayAdapter<String> adapter;
+    private DatabaseReference runnerDataBase;
 
     private Controller(){
 
@@ -28,6 +37,14 @@ package com.example.nicholas.pathfinderapp;
         }
 
         return sSoleInstance;
+    }
+
+    public DatabaseReference getRunnerDataBase() {
+        return runnerDataBase;
+    }
+
+    public void setRunnerDataBase(DatabaseReference runnerDataBase) {
+        this.runnerDataBase = runnerDataBase;
     }
 
     public void setUser(String user){
