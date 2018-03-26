@@ -2,6 +2,10 @@ package com.example.nicholas.pathfinderapp;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
@@ -29,17 +33,38 @@ public class GenerateRouteActivity extends AppCompatActivity {
 
     private Button btnStart, btnStop, btnSmallRun, btnMediumRun, btnSmallRunKm, btnMediumRunKm, btnSubmit;
     private ImageButton btnMainMenu;
+    private Button btnStart, btnStop, btnSmallRun, btnMediumRun, btnLongRun;
+    protected LocationManager locationManager;
+    protected LocationListener locationListener;
     private Chronometer stopWatch;
     private int mLowDistance;
     private DatabaseReference runnerDataBase;
     private Controller mController = Controller.getSoleInstance();
     private Switch kmMileSwitch;
     private final String TAG = "GenerateRouteActivity";
+    public static double lat;
+    public static double lng;
+    //GenerateRouteClass cls = new GenerateRouteClass();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_route);
+
+        locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if(checkLocationPermission()) {
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            btnSmallRun.setEnabled(true);
+            btnMediumRun.setEnabled(true);
+            //cls.genRouteMethod(lat, lng);
+        }
+        else{
+            Toast toast = Toast.makeText(getApplicationContext(),"ERROR: No location permission given", Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.BOTTOM,0,0);
+            toast.show();
+            btnMediumRun.setEnabled(false);
+            btnSmallRun.setEnabled(false);
+        }
 
         runnerDataBase = FirebaseDatabase.getInstance().getReference();
         mController.setRunnerDataBase(runnerDataBase);
@@ -84,8 +109,6 @@ public class GenerateRouteActivity extends AppCompatActivity {
                 finish();
             }
         });
-
-
 
 
         btnSmallRun.setOnClickListener(new View.OnClickListener() {
@@ -133,6 +156,33 @@ public class GenerateRouteActivity extends AppCompatActivity {
         });
 
 
+    }
+    public boolean checkLocationPermission() {
+        String permission = "android.permission.ACCESS_FINE_LOCATION";
+        int res = this.checkCallingOrSelfPermission(permission);
+        return (res == PackageManager.PERMISSION_GRANTED);
+    }
+
+    @Override
+    public void onLocationChanged(Location location) {
+        lat = location.getLatitude();
+        lng = location.getLongitude();
+        Log.d("location change:", lat +" " + lng );
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        Log.d("Latitude","disable");
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+        Log.d("Latitude","enable");
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        Log.d("Latitude","status");
     }
 
 

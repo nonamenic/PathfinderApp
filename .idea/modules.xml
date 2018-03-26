@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/PathfinderApp.iml" filepath="$PROJECT_DIR$/.idea/PathfinderApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/PathfinderApp.iml" filepath="$PROJECT_DIR$/PathfinderApp.iml" />
+      <module fileurl="file://C:\Users\Nicholas\Documents\1 Classes\Mobile Apps Attempt 2\PathfinderApp\.idea\PathfinderApp.iml" filepath="C:\Users\Nicholas\Documents\1 Classes\Mobile Apps Attempt 2\PathfinderApp\.idea\PathfinderApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
   </component>
