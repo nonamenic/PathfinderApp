@@ -7,6 +7,7 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -41,26 +42,37 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
     private final String TAG = "GenerateRouteActivity";
     public static double lat;
     public static double lng;
-    //GenerateRouteClass cls = new GenerateRouteClass();
+    GenerateRouteClass cls = new GenerateRouteClass();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_route);
+        Log.d(TAG,"on create");
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+
+
         if(checkLocationPermission()) {
+            Log.d(TAG,"entered location permission yes");
+
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
-            btnSmallRun.setEnabled(true);
-            btnMediumRun.setEnabled(true);
-            //cls.genRouteMethod(lat, lng);
+            //btnSmallRun.setEnabled(false);
+            //btnMediumRun.setEnabled(false);
+            //Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+           //lat = location.getLatitude();
+            //lng = location.getLongitude();
+            Log.d(TAG,"a;lskdjfal;skdjfalksdjfalksdjflkajsdlkfjsalkdjflksd" + lat + lng);
+            cls.genRouteMethod(40.00265226,-83.01460162);
         }
         else{
             Toast toast = Toast.makeText(getApplicationContext(),"ERROR: No location permission given", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.BOTTOM,0,0);
-            toast.show();
-            btnMediumRun.setEnabled(false);
-            btnSmallRun.setEnabled(false);
+            toast.show();checkLocationPermission();
+            Log.d(TAG,"Entered Else loop, no permission");
+            //btnMediumRun.setEnabled(false);
+            //btnSmallRun.setEnabled(false);
         }
 
         runnerDataBase = FirebaseDatabase.getInstance().getReference();

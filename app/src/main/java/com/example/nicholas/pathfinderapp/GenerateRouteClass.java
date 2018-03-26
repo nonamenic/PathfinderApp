@@ -1,5 +1,7 @@
 package com.example.nicholas.pathfinderapp;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -167,7 +169,8 @@ miles       KM            middle mile
         //do not need origin if using current location for start
         String URL="https://www.google.com/maps/dir/?api=1=";
         URL=URL  + "&destination=" + destination +"&travelmode=walking&waypoints="+bottomRight+"%7C"+topRight+"%7C"+topLeft;
-        System.out.println(URL);
+        Log.d("TAG", URL);
+        //System.out.println(URL);
         //https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40,-83&destinations=40.0,-82.9891618746764%7C40.007246376811594,-82.9891618746764%7C40.007246376811594,-83.0%7C40,-83&key=AIzaSyAoA1iVXsmRxn7jQae_cKIQxG4p34NMe78
 
 
