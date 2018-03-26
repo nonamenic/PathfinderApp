@@ -19,11 +19,16 @@ public class RunnerStats {
 
     }
 
-    public RunnerStats( String user, int distance, long totalTime) {
+    public RunnerStats( String id, String user, int distance, long totalTime) {
+        mId = id;
         mUser = user;
         mDistance = distance;
         mTotalTime = totalTime;
 
+    }
+
+    public String getId() {
+        return mId;
     }
 
     public int getDistance() {
@@ -33,6 +38,9 @@ public class RunnerStats {
     public long getTotalTime() {
         return mTotalTime;
     }
+
+
+
 
     public String getUser() {
         return mUser;

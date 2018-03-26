@@ -38,6 +38,14 @@
             android:text="@string/btn_GenRoute"
             android:textColor="@android:color/black" />
         <Button
+            android:id="@+id/history_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:background="@color/colorAccent"
+            android:text="@string/btn_history"
+            android:textColor="@android:color/black" />
+        <Button
             android:id="@+id/settings_button"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

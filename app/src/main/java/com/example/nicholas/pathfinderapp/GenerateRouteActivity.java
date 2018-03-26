@@ -13,22 +13,31 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 public abstract class GenerateRouteActivity extends AppCompatActivity implements LocationListener {
+import java.util.ArrayList;
 
+public class GenerateRouteActivity extends AppCompatActivity {
+
+    private Button btnStart, btnStop, btnSmallRun, btnMediumRun;
+    private ImageButton btnMainMenu;
     private Button btnStart, btnStop, btnSmallRun, btnMediumRun, btnLongRun;
     protected LocationManager locationManager;
     protected LocationListener locationListener;
     private Chronometer stopWatch;
-    private int mLowDistance, mHighDistance;
+    private int mLowDistance;
     private DatabaseReference runnerDataBase;
     private Controller mController = Controller.getSoleInstance();
     private final String TAG = "GenerateRouteActivity";
@@ -57,13 +66,23 @@ public abstract class GenerateRouteActivity extends AppCompatActivity implements
         }
 
         runnerDataBase = FirebaseDatabase.getInstance().getReference();
+        mController.setRunnerDataBase(runnerDataBase);
        // Log.d(TAG, "Updating question text", new Exception());
         btnStart = (Button) findViewById(R.id.start_button);
+        btnMainMenu = (ImageButton) findViewById(R.id.image_button);
         btnStop = (Button) findViewById(R.id.stop_button);
         btnSmallRun = (Button) findViewById(R.id.smallRun_button);
         btnMediumRun = (Button) findViewById(R.id.mediumRun_button);
-        btnLongRun = (Button) findViewById(R.id.longRun_button);
         stopWatch = (Chronometer) findViewById(R.id.stop_watch);
+
+        btnMainMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GenerateRouteActivity.this, MainMenuActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
 
 
 
@@ -86,6 +105,7 @@ public abstract class GenerateRouteActivity extends AppCompatActivity implements
                 toast.show();
             }
         });
+
 
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,8 +131,6 @@ public abstract class GenerateRouteActivity extends AppCompatActivity implements
         });
 
 
-
-
     }
     public boolean checkLocationPermission() {
         String permission = "android.permission.ACCESS_FINE_LOCATION";
@@ -133,11 +151,14 @@ public abstract class GenerateRouteActivity extends AppCompatActivity implements
         long time = SystemClock.elapsedRealtime() - stopWatch.getBase();
 
 
+
         String id = runnerDataBase.push().getKey();
-        RunnerStats runnerStats = new RunnerStats(mController.getUser(), mLowDistance, time);
+        RunnerStats runnerStats = new RunnerStats(id, mController.getUser(), mLowDistance, time);
 
         runnerDataBase.child(id).setValue(runnerStats);
 
     }
+
+
 
 }
