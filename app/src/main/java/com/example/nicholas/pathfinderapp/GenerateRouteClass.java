@@ -72,7 +72,7 @@ public class GenerateRouteClass {
 
 
 
-    public static String genRouteMethod(double lat, double lng) {
+    public static String genRouteMethod(double lat, double lng, double dist) {
         double currentLocationLat=40.00265226;
         double currentLocationLong=-83.01460162;
         double distBetweenLng=0.0;
@@ -80,7 +80,7 @@ public class GenerateRouteClass {
         double distBetweenPoints=0.0;
         //System.out.println(distBetweenLng);
 
-        double routeDist=8;
+        double routeDist= dist;
 /*
 miles KM middle mile
 1-3 1.609-4.828 2

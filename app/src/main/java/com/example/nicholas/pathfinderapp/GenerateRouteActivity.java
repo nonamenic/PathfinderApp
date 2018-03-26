@@ -9,6 +9,7 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.nfc.Tag;
+import android.opengl.Visibility;
 import android.os.Build;
 import android.os.SystemClock;
 import android.provider.Settings;
@@ -67,12 +68,10 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
             //btnSmallRun.setEnabled(false);
             //btnMediumRun.setEnabled(false);
-            //Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-           //lat = location.getLatitude();
-            //lng = location.getLongitude();
-            Log.d(TAG,"a;lskdjfal;skdjfalksdjfalksdjflkajsdlkfjsalkdjflksd" + lat + lng);
-            //cls.genRouteMethod(40.00265226,-83.01460162);
-            URL = cls.genRouteMethod(0,0);
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+           lat = 40.0007168; //location.getLatitude();
+            lng = -83.0103552;// location.getLongitude();
+
         }
         else{
             Toast toast = Toast.makeText(getApplicationContext(),"ERROR: No location permission given", Toast.LENGTH_LONG);
@@ -119,6 +118,7 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
         stopWatch = (Chronometer) findViewById(R.id.stop_watch);
         kmMileSwitch = (Switch) findViewById(R.id.kmMile_switch);
         btnSubmit = (Button) findViewById(R.id.refresh_button);
+        btnStart.setVisibility(View.GONE);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,6 +157,20 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
                 Toast toast = Toast.makeText(getApplicationContext(), "You selected a short run!", Toast.LENGTH_LONG);
                 mLowDistance = 1;
                 toast.setGravity(Gravity.BOTTOM, 0, 0);
+                URL = cls.genRouteMethod(lat,lng, 2);
+                btnStart.setVisibility(View.VISIBLE);
+                toast.show();
+            }
+        });
+
+        btnSmallRunKm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast = Toast.makeText(getApplicationContext(), "You selected a short run!", Toast.LENGTH_LONG);
+                mLowDistance = 1;
+                toast.setGravity(Gravity.BOTTOM, 0, 0);
+                URL = cls.genRouteMethod(lat,lng, 2);
+                btnStart.setVisibility(View.VISIBLE);
                 toast.show();
             }
         });
@@ -167,6 +181,20 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
                 Toast toast = Toast.makeText(getApplicationContext(), "You selected a medium run!", Toast.LENGTH_LONG);
                 mLowDistance = 5;
                 toast.setGravity(Gravity.BOTTOM, 0, 0);
+                URL = cls.genRouteMethod(lat,lng, 8);
+                btnStart.setVisibility(View.VISIBLE);
+                toast.show();
+            }
+        });
+
+        btnMediumRunKm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast toast = Toast.makeText(getApplicationContext(), "You selected a medium run!", Toast.LENGTH_LONG);
+                mLowDistance = 5;
+                toast.setGravity(Gravity.BOTTOM, 0, 0);
+                URL = cls.genRouteMethod(lat,lng, 8);
+                btnStart.setVisibility(View.VISIBLE);
                 toast.show();
             }
         });
@@ -175,12 +203,13 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
         btnStart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Uri gmmIntentUri = Uri.parse("https://www.google.com/maps/dir/?api=1&origin=Paris,France&destination=Cherbourg,France&travelmode=driving&waypoints=Versailles,France%7CChartres,France%7CLe+Mans,France%7CCaen,France");
-                Intent mapIntent = new Intent(Intent.ACTION_VIEW);
-                mapIntent.setData(gmmIntentUri);
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse(URL));
                 stopWatch.setBase(SystemClock.elapsedRealtime());
                 stopWatch.start();
-                startActivity(mapIntent);
+                startActivity(intent);
             }
         });
 
@@ -238,6 +267,7 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
         runnerDataBase.child(id).setValue(runnerStats);
 
     }
+
 
 
 
