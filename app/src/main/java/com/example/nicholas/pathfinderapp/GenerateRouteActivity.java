@@ -25,13 +25,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-
-public abstract class GenerateRouteActivity extends AppCompatActivity implements LocationListener {
 import java.util.ArrayList;
 
-public class GenerateRouteActivity extends AppCompatActivity {
+public class GenerateRouteActivity extends AppCompatActivity implements LocationListener {
 
-    private Button btnStart, btnStop, btnSmallRun, btnMediumRun;
+
     private ImageButton btnMainMenu;
     private Button btnStart, btnStop, btnSmallRun, btnMediumRun, btnLongRun;
     protected LocationManager locationManager;
@@ -43,7 +41,7 @@ public class GenerateRouteActivity extends AppCompatActivity {
     private final String TAG = "GenerateRouteActivity";
     public static double lat;
     public static double lng;
-    GenerateRouteClass cls = new GenerateRouteClass();
+    //GenerateRouteClass cls = new GenerateRouteClass();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +53,7 @@ public class GenerateRouteActivity extends AppCompatActivity {
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
             btnSmallRun.setEnabled(true);
             btnMediumRun.setEnabled(true);
-            cls.genRouteMethod(lat, lng);
+            //cls.genRouteMethod(lat, lng);
         }
         else{
             Toast toast = Toast.makeText(getApplicationContext(),"ERROR: No location permission given", Toast.LENGTH_LONG);
@@ -143,6 +141,21 @@ public class GenerateRouteActivity extends AppCompatActivity {
         lat = location.getLatitude();
         lng = location.getLongitude();
         Log.d("location change:", lat +" " + lng );
+    }
+
+    @Override
+    public void onProviderDisabled(String provider) {
+        Log.d("Latitude","disable");
+    }
+
+    @Override
+    public void onProviderEnabled(String provider) {
+        Log.d("Latitude","enable");
+    }
+
+    @Override
+    public void onStatusChanged(String provider, int status, Bundle extras) {
+        Log.d("Latitude","status");
     }
 
 

@@ -31,6 +31,7 @@
         <activity android:name=".ResetPasswordActivity" />
         <activity android:name=".ProfileActivity" />
         <activity android:name=".MainMenuActivity" />
+        <activity android:name=".GenerateRouteActivity" />
         <activity android:name=".HistoryActivity"></activity>
     </application>
 

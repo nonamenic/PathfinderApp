@@ -165,8 +165,8 @@ miles       KM            middle mile
         String topLeft = Double.toString(upperLeftLat) + "," + Double.toString(upperLeftLong);
 
         //do not need origin if using current location for start
-        String URL="https://www.google.com/maps/dir/?api=1&origin=";
-        URL=URL + origin + "&destination=" + destination +"&travelmode=walking&waypoints="+bottomRight+"%7C"+topRight+"%7C"+topLeft;
+        String URL="https://www.google.com/maps/dir/?api=1=";
+        URL=URL  + "&destination=" + destination +"&travelmode=walking&waypoints="+bottomRight+"%7C"+topRight+"%7C"+topLeft;
         System.out.println(URL);
         //https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=40,-83&destinations=40.0,-82.9891618746764%7C40.007246376811594,-82.9891618746764%7C40.007246376811594,-83.0%7C40,-83&key=AIzaSyAoA1iVXsmRxn7jQae_cKIQxG4p34NMe78
 
