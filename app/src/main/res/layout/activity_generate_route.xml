@@ -24,6 +24,19 @@
             android:layout_marginBottom="30dp"
             android:src="@mipmap/ic_launcher" />
 
+        <Switch
+            android:id="@+id/kmMile_switch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Kilometers/Miles" />
+        <Button
+            android:id="@+id/refresh_button"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
+            android:text="@string/btn_refresh"
+            android:textColor="@android:color/black" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -42,9 +55,19 @@
                 android:text="@string/pickDistance" />
 
             <Button
+                android:id="@+id/smallRun_buttonKM"
+                style="?android:textAppearanceSmall"
+                android:text="@string/OneToFiveKM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"/>
+            <Button
                 android:id="@+id/smallRun_button"
                 style="?android:textAppearanceSmall"
                 android:text="@string/OneToThreeMiles"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"
@@ -52,8 +75,19 @@
                 android:textStyle="bold"/>
 
             <Button
+                android:id="@+id/mediumRun_buttonKM"
+                style="?android:textAppearanceSmall"
+                android:text="@string/SixToNineteenKM"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dip"
+                android:background="@color/colorPrimaryDark"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"/>
+            <Button
                 android:id="@+id/mediumRun_button"
                 android:layout_width="match_parent"
+                android:visibility="gone"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"
                 android:layout_marginTop="16dip"

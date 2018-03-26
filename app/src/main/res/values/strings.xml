@@ -56,6 +56,8 @@
     <string name="btn_stop">Stop and Save</string>
     <string name="pickDistance">Please pick a distance range below.</string>
     <string name="OneToThreeMiles">1 to 3 miles</string>
-    <string name="FiveToTenMiles">5 to 10 miles</string>
-    <string name="ElevenToFifteenMiles">11 to 15 miles</string>
+    <string name="FiveToTenMiles">4 to 12 miles</string>
+    <string name="OneToFiveKM">1.61 to 5 km</string>
+    <string name="SixToNineteenKM">6.44 to 19.31 km</string>
+    <string name="btn_refresh">Refresh</string>
 </resources>

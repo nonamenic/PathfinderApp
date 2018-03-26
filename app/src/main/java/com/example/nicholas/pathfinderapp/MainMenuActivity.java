@@ -20,8 +20,8 @@ public class MainMenuActivity extends AppCompatActivity {
 
         btnGenRoute = (Button) findViewById(R.id.GenRoute_button);
         btnProfile = (Button) findViewById(R.id.profile_button);
-        btnHistory = (Button) findViewById(R.id.history_button);
-        btnSettings = (Button) findViewById(R.id.settings_button);
+        //btnHistory = (Button) findViewById(R.id.history_button);
+        //btnSettings = (Button) findViewById(R.id.settings_button);
 
         btnProfile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,14 +41,14 @@ public class MainMenuActivity extends AppCompatActivity {
         });
 
 
-        btnHistory.setOnClickListener(new View.OnClickListener() {
+        /*btnHistory.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainMenuActivity.this, HistoryActivity.class);
                 startActivity(intent);
                 finish();
             }
-        });
+        });*/
 
         /*btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
