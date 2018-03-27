@@ -119,9 +119,9 @@
             <Button
                 android:id="@+id/stop_button"
                 style="?android:textAppearanceSmall"
-                android:layout_marginTop="16dip"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center|bottom"
                 android:background="@color/colorPrimaryDark"
                 android:text="@string/btn_stop"
                 android:textColor="@android:color/white"

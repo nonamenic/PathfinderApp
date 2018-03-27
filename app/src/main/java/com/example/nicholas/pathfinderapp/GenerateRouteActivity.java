@@ -60,6 +60,13 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+        if (ActivityCompat.checkSelfPermission(GenerateRouteActivity.this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(GenerateRouteActivity.this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(GenerateRouteActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+            return;
+        }else{
+            //nothing
+        }
+
 
 
         if(checkLocationPermission()) {
@@ -119,6 +126,7 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
         kmMileSwitch = (Switch) findViewById(R.id.kmMile_switch);
         btnSubmit = (Button) findViewById(R.id.refresh_button);
         btnStart.setVisibility(View.GONE);
+        btnStop.setVisibility(View.GONE);
 
         btnSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -210,6 +218,8 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
                 stopWatch.setBase(SystemClock.elapsedRealtime());
                 stopWatch.start();
                 startActivity(intent);
+                btnStart.setVisibility(View.GONE);
+                btnStop.setVisibility(View.VISIBLE);
             }
         });
 
@@ -221,6 +231,8 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
                 toast.setGravity(Gravity.BOTTOM, 0, 0);
                 toast.show();
                 addStats();
+                btnStart.setVisibility((View.VISIBLE));
+                btnStop.setVisibility(View.GONE);
             }
         });
 
