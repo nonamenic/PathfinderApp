@@ -19,20 +19,21 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".LoginActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SecondActivity" />
-        <activity android:name=".SignupActivity" />
-        <activity android:name=".ResetPasswordActivity" />
-        <activity android:name=".ProfileActivity" />
-        <activity android:name=".MainMenuActivity" />
-        <activity android:name=".GenerateRouteActivity" />
-        <activity android:name=".HistoryActivity"></activity>
+        <activity android:name=".SecondActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".SignupActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ResetPasswordActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".ProfileActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".MainMenuActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".GenerateRouteActivity" android:screenOrientation="portrait"/>
+        <activity android:name=".HistoryActivity" android:screenOrientation="portrait"/>
     </application>
 
 </manifest>
