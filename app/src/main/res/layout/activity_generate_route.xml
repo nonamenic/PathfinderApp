@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.nicholas.pathfinderapp.GenerateRouteActivity">
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,18 +25,40 @@
             android:layout_marginBottom="30dp"
             android:src="@mipmap/ic_launcher" />
 
-        <Switch
+        <!--<Switch
             android:id="@+id/kmMile_switch"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="Kilometers/Miles" />
-        <Button
-            android:id="@+id/refresh_button"
-            android:layout_width="fill_parent"
+            android:text="Kilometers/Miles" />-->
+        <RelativeLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorAccent"
-            android:text="@string/btn_refresh"
-            android:textColor="@android:color/black" />
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
+            <Button
+                android:id="@+id/kilometers_button"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:text="Kilometers"
+                android:layout_alignParentLeft="true"
+                android:textColor="@android:color/black" />
+
+            <Button
+                android:id="@+id/miles_button"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@color/colorAccent"
+                android:text="Miles"
+                android:textColor="@android:color/black" />
+        </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -57,54 +80,55 @@
             <Button
                 android:id="@+id/smallRun_buttonKM"
                 style="?android:textAppearanceSmall"
-                android:text="@string/OneToFiveKM"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"
+                android:text="@string/OneToFiveKM"
                 android:textColor="@android:color/white"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
+
             <Button
                 android:id="@+id/smallRun_button"
                 style="?android:textAppearanceSmall"
-                android:text="@string/OneToThreeMiles"
-                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"
+                android:text="@string/OneToThreeMiles"
                 android:textColor="@android:color/white"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/mediumRun_buttonKM"
                 style="?android:textAppearanceSmall"
-                android:text="@string/SixToNineteenKM"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dip"
                 android:background="@color/colorPrimaryDark"
+                android:text="@string/SixToNineteenKM"
                 android:textColor="@android:color/white"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
+
             <Button
                 android:id="@+id/mediumRun_button"
                 android:layout_width="match_parent"
-                android:visibility="gone"
                 android:layout_height="wrap_content"
-                android:background="@color/colorPrimaryDark"
                 android:layout_marginTop="16dip"
+                android:background="@color/colorPrimaryDark"
                 android:text="@string/FiveToTenMiles"
                 android:textColor="@android:color/white"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:visibility="gone" />
 
             <Chronometer
                 android:id="@+id/stop_watch"
+                style="?android:textAppearanceLarge"
                 android:layout_width="match_parent"
                 android:layout_height="75dp"
-                style="?android:textAppearanceLarge"
                 android:gravity="center_horizontal|center_vertical"
                 android:textColor="@color/colorPrimaryDark"
                 android:textSize="50dp"
-                android:textStyle="bold|italic"
-                />
+                android:textStyle="bold|italic" />
 
             <Button
                 android:id="@+id/start_button"
@@ -116,6 +140,7 @@
                 android:text="@string/btn_start"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
+
             <Button
                 android:id="@+id/stop_button"
                 style="?android:textAppearanceSmall"
@@ -125,10 +150,9 @@
                 android:background="@color/colorPrimaryDark"
                 android:text="@string/btn_stop"
                 android:textColor="@android:color/white"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
         </LinearLayout>
-
 
 
     </LinearLayout>

@@ -37,7 +37,7 @@ import java.util.ArrayList;
 
 public class GenerateRouteActivity extends AppCompatActivity implements LocationListener {
 
-    private Button btnStart, btnStop, btnSmallRun, btnMediumRun, btnSmallRunKm, btnMediumRunKm, btnSubmit;
+    private Button btnStart, btnStop, btnSmallRun, btnMediumRun, btnSmallRunKm, btnMediumRunKm, btnKilometers, btnMiles;
     private ImageButton btnMainMenu;
     protected LocationManager locationManager;
     protected LocationListener locationListener;
@@ -123,25 +123,32 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
         btnSmallRunKm = (Button) findViewById(R.id.smallRun_buttonKM);
         btnMediumRunKm = (Button) findViewById(R.id.mediumRun_buttonKM);
         stopWatch = (Chronometer) findViewById(R.id.stop_watch);
-        kmMileSwitch = (Switch) findViewById(R.id.kmMile_switch);
-        btnSubmit = (Button) findViewById(R.id.refresh_button);
+        //kmMileSwitch = (Switch) findViewById(R.id.kmMile_switch);
+        btnKilometers = (Button) findViewById(R.id.kilometers_button);
+        btnMiles = (Button) findViewById(R.id.miles_button);
         btnStart.setVisibility(View.GONE);
         btnStop.setVisibility(View.GONE);
 
-        btnSubmit.setOnClickListener(new View.OnClickListener() {
+        btnKilometers.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(kmMileSwitch.isChecked()){
-                    btnSmallRunKm.setVisibility(View.GONE);
-                    btnMediumRunKm.setVisibility(View.GONE);
-                    btnMediumRun.setVisibility(View.VISIBLE);
-                    btnSmallRun.setVisibility(View.VISIBLE);
-                }else{
-                    btnSmallRunKm.setVisibility(View.VISIBLE);
-                    btnMediumRunKm.setVisibility(View.VISIBLE);
-                    btnMediumRun.setVisibility(View.GONE);
-                    btnSmallRun.setVisibility(View.GONE);
-                }
+
+            btnSmallRunKm.setVisibility(View.VISIBLE);
+            btnMediumRunKm.setVisibility(View.VISIBLE);
+            btnMediumRun.setVisibility(View.GONE);
+            btnSmallRun.setVisibility(View.GONE);
+
+            }
+        });
+
+        btnMiles.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            btnSmallRunKm.setVisibility(View.GONE);
+            btnMediumRunKm.setVisibility(View.GONE);
+            btnMediumRun.setVisibility(View.VISIBLE);
+            btnSmallRun.setVisibility(View.VISIBLE);
+
             }
         });
 
