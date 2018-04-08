@@ -176,7 +176,7 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
         btnSmallRun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(getApplicationContext(), "You selected a short run!", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.selectShortRun, Toast.LENGTH_LONG);
                 mLowDistance = 1;
                 toast.setGravity(Gravity.BOTTOM, 0, 0);
                 URL = cls.genRouteMethod(lat,lng, 2, queue);
@@ -188,7 +188,7 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
         /*btnSmallRunKm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(getApplicationContext(), "You selected a short run!", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.selectShortRun, Toast.LENGTH_LONG);
                 mLowDistance = 1;
                 toast.setGravity(Gravity.BOTTOM, 0, 0);
                 URL = cls.genRouteMethod(lat,lng, 2, queue);
@@ -200,7 +200,7 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
         btnMediumRun.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(getApplicationContext(), "You selected a medium run!", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.selectMediumRun, Toast.LENGTH_LONG);
                 mLowDistance = 5;
                 toast.setGravity(Gravity.BOTTOM, 0, 0);
                 URL = cls.genRouteMethod(lat,lng, 8, queue);
@@ -212,7 +212,7 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
         /*btnMediumRunKm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast toast = Toast.makeText(getApplicationContext(), "You selected a medium run!", Toast.LENGTH_LONG);
+                Toast toast = Toast.makeText(getApplicationContext(), R.string.selectMediumRun, Toast.LENGTH_LONG);
                 mLowDistance = 5;
                 toast.setGravity(Gravity.BOTTOM, 0, 0);
                 URL = cls.genRouteMethod(lat,lng, 8, queue);

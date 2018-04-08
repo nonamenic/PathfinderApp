@@ -60,4 +60,6 @@
     <string name="OneToFiveKM">1.61 to 5 km</string>
     <string name="SixToNineteenKM">6.44 to 19.31 km</string>
     <string name="btn_refresh">Refresh</string>
+    <string name="selectShortRun">You selected a short run!</string>
+    <string name="selectMediumRun">You selected a medium run!</string>
 </resources>
