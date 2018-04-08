@@ -8,9 +8,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.nfc.Tag;
-import android.opengl.Visibility;
-import android.os.Build;
 import android.os.SystemClock;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
@@ -19,25 +16,20 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Switch;
 import android.widget.Toast;
 
-import com.google.firebase.database.ChildEventListener;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.util.ArrayList;
-
 public class GenerateRouteActivity extends AppCompatActivity implements LocationListener {
 
-    private Button btnStart, btnStop, btnSmallRun, btnMediumRun, btnSmallRunKm, btnMediumRunKm, btnKilometers, btnMiles;
+    private Button btnStart, btnStop, btnSmallRun, btnMediumRun,/* btnSmallRunKm, btnMediumRunKm,*/ btnKilometers, btnMiles;
     private ImageButton btnMainMenu;
     protected LocationManager locationManager;
     protected LocationListener locationListener;
@@ -51,11 +43,14 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
     public static double lng;
     private String URL;
     GenerateRouteClass cls = new GenerateRouteClass();
+    // Instantiate the RequestQueue.
+    RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_route);
+        queue = Volley.newRequestQueue(getApplicationContext());
         Log.d(TAG,"on create");
 
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -76,10 +71,18 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
             //btnSmallRun.setEnabled(false);
             //btnMediumRun.setEnabled(false);
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-           lat = 40.0007168; //location.getLatitude();
-            lng = -83.0103552;// location.getLongitude();
+            if(location != null) {
+                //check if using emulator to be able to work in test scenario
+                lat = location.getLatitude();
+                lng = location.getLongitude();
+            }
+            else {
+                lat = 40.0007168;
+                lng = -83.0103552;
+            }
 
         }
+
         else{
             Toast toast = Toast.makeText(getApplicationContext(),"ERROR: No location permission given", Toast.LENGTH_LONG);
             toast.setGravity(Gravity.BOTTOM,0,0);
@@ -120,8 +123,8 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
         btnStop = (Button) findViewById(R.id.stop_button);
         btnSmallRun = (Button) findViewById(R.id.smallRun_button);
         btnMediumRun = (Button) findViewById(R.id.mediumRun_button);
-        btnSmallRunKm = (Button) findViewById(R.id.smallRun_buttonKM);
-        btnMediumRunKm = (Button) findViewById(R.id.mediumRun_buttonKM);
+        /*btnSmallRunKm = (Button) findViewById(R.id.smallRun_buttonKM);
+        btnMediumRunKm = (Button) findViewById(R.id.mediumRun_buttonKM);*/
         stopWatch = (Chronometer) findViewById(R.id.stop_watch);
         //kmMileSwitch = (Switch) findViewById(R.id.kmMile_switch);
         btnKilometers = (Button) findViewById(R.id.kilometers_button);
@@ -133,10 +136,12 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
             @Override
             public void onClick(View v) {
 
-            btnSmallRunKm.setVisibility(View.VISIBLE);
+            /*btnSmallRunKm.setVisibility(View.VISIBLE);
             btnMediumRunKm.setVisibility(View.VISIBLE);
             btnMediumRun.setVisibility(View.GONE);
-            btnSmallRun.setVisibility(View.GONE);
+            btnSmallRun.setVisibility(View.GONE);*/
+            btnMediumRun.setText(R.string.SixToNineteenKM);
+            btnSmallRun.setText(R.string.OneToFiveKM);
 
             }
         });
@@ -144,10 +149,12 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
         btnMiles.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-            btnSmallRunKm.setVisibility(View.GONE);
+            /*btnSmallRunKm.setVisibility(View.GONE);
             btnMediumRunKm.setVisibility(View.GONE);
             btnMediumRun.setVisibility(View.VISIBLE);
-            btnSmallRun.setVisibility(View.VISIBLE);
+            btnSmallRun.setVisibility(View.VISIBLE);*/
+            btnMediumRun.setText(R.string.FourToTwelveMiles);
+            btnSmallRun.setText(R.string.OneToThreeMiles);
 
             }
         });
@@ -172,23 +179,23 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
                 Toast toast = Toast.makeText(getApplicationContext(), "You selected a short run!", Toast.LENGTH_LONG);
                 mLowDistance = 1;
                 toast.setGravity(Gravity.BOTTOM, 0, 0);
-                URL = cls.genRouteMethod(lat,lng, 2);
+                URL = cls.genRouteMethod(lat,lng, 2, queue);
                 btnStart.setVisibility(View.VISIBLE);
                 toast.show();
             }
         });
 
-        btnSmallRunKm.setOnClickListener(new View.OnClickListener() {
+        /*btnSmallRunKm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast toast = Toast.makeText(getApplicationContext(), "You selected a short run!", Toast.LENGTH_LONG);
                 mLowDistance = 1;
                 toast.setGravity(Gravity.BOTTOM, 0, 0);
-                URL = cls.genRouteMethod(lat,lng, 2);
+                URL = cls.genRouteMethod(lat,lng, 2, queue);
                 btnStart.setVisibility(View.VISIBLE);
                 toast.show();
             }
-        });
+        });*/
 
         btnMediumRun.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,23 +203,23 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
                 Toast toast = Toast.makeText(getApplicationContext(), "You selected a medium run!", Toast.LENGTH_LONG);
                 mLowDistance = 5;
                 toast.setGravity(Gravity.BOTTOM, 0, 0);
-                URL = cls.genRouteMethod(lat,lng, 8);
+                URL = cls.genRouteMethod(lat,lng, 8, queue);
                 btnStart.setVisibility(View.VISIBLE);
                 toast.show();
             }
         });
 
-        btnMediumRunKm.setOnClickListener(new View.OnClickListener() {
+        /*btnMediumRunKm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast toast = Toast.makeText(getApplicationContext(), "You selected a medium run!", Toast.LENGTH_LONG);
                 mLowDistance = 5;
                 toast.setGravity(Gravity.BOTTOM, 0, 0);
-                URL = cls.genRouteMethod(lat,lng, 8);
+                URL = cls.genRouteMethod(lat,lng, 8, queue);
                 btnStart.setVisibility(View.VISIBLE);
                 toast.show();
             }
-        });
+        });*/
 
 
         btnStart.setOnClickListener(new View.OnClickListener() {

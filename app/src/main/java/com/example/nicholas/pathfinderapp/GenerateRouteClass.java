@@ -1,17 +1,35 @@
 package com.example.nicholas.pathfinderapp;
 
+import android.app.Activity;
 import android.util.Log;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.RequestFuture;
+import com.android.volley.toolbox.Volley;
+import com.android.volley.RequestQueue;
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+
+import org.json.JSONObject;
+
 
 /**
  * Created by Nicholas on 3/26/2018.
  */
 
 public class GenerateRouteClass {
+
+
     public static double getDistanceBetweenLongitude(double latitude){
         double milesIn1DegOfLong= Math.cos(Math.toRadians(latitude))*69.172;
 //System.out.println(Math.cos(Math.toRadians(latitude))*69.172);
@@ -31,7 +49,41 @@ public class GenerateRouteClass {
         return (dist/69)+curLatitude;
     }
 
-    public static double checkDist(String lat1, String lng1, String lat2, String lng2) throws Exception{
+    public static StringBuffer checkDist(String lat1, String lng1, String lat2, String lng2, RequestQueue queue) throws Exception{
+        final StringBuffer resp = new StringBuffer();
+
+        // Instantiate the RequestQueue.
+        //RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+        String url ="https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=YOUR_API_KEY";
+
+// Request a string response from the provided URL.
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // Display the first 500 characters of the response string.
+                        //mTextView.setText("Response is: "+ response.substring(0,500));
+                        Log.d("TAG", response);
+                        resp.append(response);
+
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                //mTextView.setText("That didn't work!");
+                Log.d("TAG", error.toString());
+
+            }
+        });
+
+        // Add the request to the RequestQueue.
+        queue.add(stringRequest);
+        //queue.start();
+        Log.d("TAG", resp.toString());
+
+        return resp;
+
+       /*
         String url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&mode=walking&origins=" + lat1+","+lng1+"&destinations="+lat2+","+lng2+"&key=AIzaSyAoA1iVXsmRxn7jQae_cKIQxG4p34NMe78";
         URL obj = new URL(url);
         HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -67,30 +119,37 @@ public class GenerateRouteClass {
 
             return  Double.parseDouble(newString2.substring(0,indexpace));
         }
-        else{ return 0.0;}
+        else{ return 0.0;}*/
     }
 
 
 
-    public static String genRouteMethod(double lat, double lng, double dist) {
+    public static String genRouteMethod(double lat, double lng, double dist, RequestQueue queue) {
         double currentLocationLat=40.00265226;
         double currentLocationLong=-83.01460162;
         double distBetweenLng=0.0;
         distBetweenLng=getDistanceBetweenLongitude(currentLocationLat);
         double distBetweenPoints=0.0;
         //System.out.println(distBetweenLng);
+        final StringBuffer resp = new StringBuffer();
 
         double routeDist= dist;
-/*
+        final RequestQueue qu = queue;
+
+        /*
 miles KM middle mile
 1-3 1.609-4.828 2
 4-12 6.437-19.312 8
 */
+        //checkDist(Double.toString(zero),Double.toString(zero),Double.toString(zero),Double.toString(zero),queue);
 
+        /*try {
+            resp.append(checkDist(Double.toString(0.0), Double.toString(0.0), Double.toString(0.0), Double.toString(0.0), qu));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }*/
 
-
-
-
+        Log.d("TAG", resp.toString());
 
         int bringInAttempts=0;
 
