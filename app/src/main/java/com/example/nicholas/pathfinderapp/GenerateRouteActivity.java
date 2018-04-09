@@ -77,8 +77,8 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
                 lng = location.getLongitude();
             }
             else {
-                lat = 40.0007168;
-                lng = -83.0103552;
+                Intent intent = new Intent(GenerateRouteActivity.this, LocationErrorActivity.class);
+                startActivity(intent);
             }
 
         }
@@ -256,6 +256,33 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
         String permission = "android.permission.ACCESS_FINE_LOCATION";
         int res = this.checkCallingOrSelfPermission(permission);
         return (res == PackageManager.PERMISSION_GRANTED);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if(checkLocationPermission()) {
+            Log.d(TAG,"entered location permission yes");
+
+            locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, this);
+            //btnSmallRun.setEnabled(false);
+            //btnMediumRun.setEnabled(false);
+            Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if(location != null) {
+                //check if using emulator to be able to work in test scenario
+                lat = location.getLatitude();
+                lng = location.getLongitude();
+            }
+            else {
+                Intent intent = new Intent(GenerateRouteActivity.this, LocationErrorActivity.class);
+                startActivity(intent);
+            }
+
+        }
+    }
+
+    public void nullLocationSet(){
+
     }
 
     @Override
