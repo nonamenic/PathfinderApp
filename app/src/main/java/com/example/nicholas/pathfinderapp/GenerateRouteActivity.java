@@ -140,8 +140,8 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
             btnMediumRunKm.setVisibility(View.VISIBLE);
             btnMediumRun.setVisibility(View.GONE);
             btnSmallRun.setVisibility(View.GONE);*/
-            btnMediumRun.setText(R.string.SixToNineteenKM);
-            btnSmallRun.setText(R.string.OneToFiveKM);
+            btnMediumRun.setText(R.string.NineToTwentyFourKM);
+            btnSmallRun.setText(R.string.OneToEightKM);
 
             }
         });
@@ -153,8 +153,8 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
             btnMediumRunKm.setVisibility(View.GONE);
             btnMediumRun.setVisibility(View.VISIBLE);
             btnSmallRun.setVisibility(View.VISIBLE);*/
-            btnMediumRun.setText(R.string.FourToTwelveMiles);
-            btnSmallRun.setText(R.string.OneToThreeMiles);
+            btnMediumRun.setText(R.string.SixToFifteenMiles);
+            btnSmallRun.setText(R.string.OneToFiveMiles);
 
             }
         });

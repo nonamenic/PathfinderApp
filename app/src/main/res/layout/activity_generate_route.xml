@@ -93,7 +93,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/colorPrimaryDark"
-                android:text="@string/OneToThreeMiles"
+                android:text="@string/OneToFiveMiles"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
 
@@ -114,7 +114,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dip"
                 android:background="@color/colorPrimaryDark"
-                android:text="@string/FourToTwelveMiles"
+                android:text="@string/SixToFifteenMiles"
                 android:textColor="@android:color/white"
                 android:textStyle="bold" />
 

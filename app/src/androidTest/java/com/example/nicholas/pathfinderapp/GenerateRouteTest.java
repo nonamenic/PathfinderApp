@@ -13,7 +13,6 @@ import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
 import static android.support.test.espresso.matcher.RootMatchers.withDecorView;
-import static android.support.test.espresso.matcher.ViewMatchers.isClickable;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
@@ -37,13 +36,13 @@ public class GenerateRouteTest {
     public void testKmAndMilesButtons(){
         onView(withId(R.id.kilometers_button)).perform(click());
 
-        onView(withText(R.string.SixToNineteenKM)).check(matches(isDisplayed()));
-        onView(withText(R.string.OneToFiveKM)).check(matches(isDisplayed()));
+        onView(withText(R.string.NineToTwentyFourKM)).check(matches(isDisplayed()));
+        onView(withText(R.string.OneToEightKM)).check(matches(isDisplayed()));
 
         onView(withId(R.id.miles_button)).perform(click());
 
-        onView(withText(R.string.FourToTwelveMiles)).check(matches(isDisplayed()));
-        onView(withText(R.string.OneToThreeMiles)).check(matches(isDisplayed()));
+        onView(withText(R.string.SixToFifteenMiles)).check(matches(isDisplayed()));
+        onView(withText(R.string.OneToFiveMiles)).check(matches(isDisplayed()));
     }
 
 

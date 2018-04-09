@@ -55,10 +55,10 @@
     <string name="btn_start">Start Run</string>
     <string name="btn_stop">Stop and Save</string>
     <string name="pickDistance">Please pick a distance range below.</string>
-    <string name="OneToThreeMiles">1 to 3 miles</string>
-    <string name="FourToTwelveMiles">4 to 12 miles</string>
-    <string name="OneToFiveKM">1.61 to 5 km</string>
-    <string name="SixToNineteenKM">6.44 to 19.31 km</string>
+    <string name="OneToFiveMiles">1 to 5 miles</string>
+    <string name="SixToFifteenMiles">6 to 15 miles</string>
+    <string name="OneToEightKM">1.61 to 8.05 km</string>
+    <string name="NineToTwentyFourKM">9.66 to 24.14 km</string>
     <string name="btn_refresh">Refresh</string>
     <string name="selectShortRun">You selected a short run!</string>
     <string name="selectMediumRun">You selected a medium run!</string>
