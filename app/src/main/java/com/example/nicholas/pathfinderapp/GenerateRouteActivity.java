@@ -7,6 +7,8 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.SystemClock;
 import android.provider.Settings;
@@ -61,6 +63,15 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
         }else{
             //nothing
         }
+        boolean connected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        }
+        else
+            connected = false;
 
 
 
@@ -71,7 +82,7 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
             //btnSmallRun.setEnabled(false);
             //btnMediumRun.setEnabled(false);
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if(location != null) {
+            if(location != null && connected != false) {
                 //check if using emulator to be able to work in test scenario
                 lat = location.getLatitude();
                 lng = location.getLongitude();
@@ -261,6 +272,15 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
     @Override
     protected void onResume() {
         super.onResume();
+        boolean connected = false;
+        ConnectivityManager connectivityManager = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            //we are connected to a network
+            connected = true;
+        }
+        else
+            connected = false;
         if(checkLocationPermission()) {
             Log.d(TAG,"entered location permission yes");
 
@@ -268,7 +288,7 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
             //btnSmallRun.setEnabled(false);
             //btnMediumRun.setEnabled(false);
             Location location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-            if(location != null) {
+            if(location != null && connected != false) {
                 //check if using emulator to be able to work in test scenario
                 lat = location.getLatitude();
                 lng = location.getLongitude();
@@ -281,9 +301,6 @@ public class GenerateRouteActivity extends AppCompatActivity implements Location
         }
     }
 
-    public void nullLocationSet(){
-
-    }
 
     @Override
     public void onLocationChanged(Location location) {

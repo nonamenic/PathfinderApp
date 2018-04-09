@@ -49,80 +49,6 @@ public class GenerateRouteClass {
         return (dist/69)+curLatitude;
     }
 
-    public static StringBuffer checkDist(String lat1, String lng1, String lat2, String lng2, RequestQueue queue) throws Exception{
-        final StringBuffer resp = new StringBuffer();
-
-        // Instantiate the RequestQueue.
-        //RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        String url ="https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=YOUR_API_KEY";
-
-// Request a string response from the provided URL.
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, url,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Display the first 500 characters of the response string.
-                        //mTextView.setText("Response is: "+ response.substring(0,500));
-                        Log.d("TAG", response);
-                        resp.append(response);
-
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                //mTextView.setText("That didn't work!");
-                Log.d("TAG", error.toString());
-
-            }
-        });
-
-        // Add the request to the RequestQueue.
-        queue.add(stringRequest);
-        //queue.start();
-        Log.d("TAG", resp.toString());
-
-        return resp;
-
-       /*
-        String url = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&mode=walking&origins=" + lat1+","+lng1+"&destinations="+lat2+","+lng2+"&key=AIzaSyAoA1iVXsmRxn7jQae_cKIQxG4p34NMe78";
-        URL obj = new URL(url);
-        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-        // optional default is GET
-        con.setRequestMethod("GET");
-        //add request header
-        con.setRequestProperty("User-Agent", "Mozilla/5.0");
-        //int responseCode = con.getResponseCode();
-        //System.out.println("\nSending 'GET' request to URL : " + url);
-        //System.out.println("Response Code : " + responseCode);
-        BufferedReader in = new BufferedReader(
-                new InputStreamReader(con.getInputStream()));
-        String inputLine;
-        StringBuffer response = new StringBuffer();
-        while ((inputLine = in.readLine()) != null) {
-            response.append(inputLine);
-        }
-        in.close();
-        //print in String
-        String respString=new String(response.toString());
-        Log.d("TAG2","\n\n"+response.toString()+"\n\n");
-        //Read JSON response and print
-        //JSONObject myResponse = new JSONObject(response.toString());
-        //System.out.println("result after Reading JSON Response");
-
-        if(respString.indexOf("text")!=-1){
-            // String distText = respString.substring(respString.indexOf("text"));
-            String newString = respString.substring(respString.indexOf("text"));
-            String newString2 = newString.substring(newString.indexOf("\"")+5);
-            int indexpace = newString2.indexOf(" ");
-
-            Log.d("TAG3",newString2.substring(0,indexpace));
-
-            return  Double.parseDouble(newString2.substring(0,indexpace));
-        }
-        else{ return 0.0;}*/
-    }
-
-
 
     public static String genRouteMethod(double lat, double lng, double dist, RequestQueue queue) {
         double currentLocationLat=40.00265226;
@@ -136,18 +62,6 @@ public class GenerateRouteClass {
         double routeDist= dist;
         final RequestQueue qu = queue;
 
-        /*
-miles KM middle mile
-1-3 1.609-4.828 2
-4-12 6.437-19.312 8
-*/
-        //checkDist(Double.toString(zero),Double.toString(zero),Double.toString(zero),Double.toString(zero),queue);
-
-        /*try {
-            resp.append(checkDist(Double.toString(0.0), Double.toString(0.0), Double.toString(0.0), Double.toString(0.0), qu));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }*/
 
         Log.d("TAG", resp.toString());
 
@@ -158,19 +72,8 @@ miles KM middle mile
 
         String origin = Double.toString(currentLocationLat) + "," + Double.toString(currentLocationLong);
         String destination=Double.toString(currentLocationLat) + "," + Double.toString(currentLocationLong);
-        //while ((distBetweenPoints<(routeDist/4)*.50 || distBetweenPoints>(routeDist/4)*1.50) && bringInAttempts<15)
-        //{//check distance to bottom right
-            rightLong=getRight((routeDist/4)*Math.pow(.6, bringInAttempts), currentLocationLong, distBetweenLng);
+        rightLong=getRight((routeDist/4)*Math.pow(.6, bringInAttempts), currentLocationLong, distBetweenLng);
 
-            /*try {
-                distBetweenPoints=checkDist(Double.toString(currentLocationLat), Double.toString(currentLocationLong), Double.toString(currentLocationLat),Double.toString(rightLong));
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-                Log.d("TAG","while loop");
-            }
-            bringInAttempts++;
-        }*/
 
         bringInAttempts=0;
         distBetweenPoints=0;
@@ -178,18 +81,8 @@ miles KM middle mile
 
 
 
-        //while ((distBetweenPoints<(routeDist/4)*.50 || distBetweenPoints>(routeDist/4)*1.50)&& bringInAttempts<15)
-        //{//check distance to bottom right
-            topLat=getUpper((routeDist/4)*Math.pow(.6, bringInAttempts), currentLocationLat);
 
-            //try {
-            //    distBetweenPoints=GenerateRouteClass.checkDist(Double.toString(currentLocationLat), Double.toString(rightLong), Double.toString(topLat),Double.toString(rightLong));
-            //} catch (Exception e) {
-            //    // TODO Auto-generated catch block
-            //    e.printStackTrace();
-            //}
-            //bringInAttempts++;
-        //}
+        topLat=getUpper((routeDist/4)*Math.pow(.6, bringInAttempts), currentLocationLat);
         bringInAttempts=0;
         distBetweenPoints=0;
         String topRight = Double.toString(topLat) + "," + Double.toString(rightLong);
@@ -198,34 +91,10 @@ miles KM middle mile
         double upperLeftLong=currentLocationLong;
 
         double distBetweenPoints2=0.0;
-        /*try {
-            distBetweenPoints=checkDist(Double.toString(topLat),Double.toString(rightLong), Double.toString(upperLeftLat), Double.toString(upperLeftLong));
-        } catch (Exception e1) {
-// TODO Auto-generated catch block
-            e1.printStackTrace();
-        }
-        try {
-            distBetweenPoints2=checkDist(Double.toString(upperLeftLat), Double.toString(upperLeftLong), Double.toString(currentLocationLat), Double.toString(currentLocationLong));
-        } catch (Exception e1) {
-// TODO Auto-generated catch block
-            e1.printStackTrace();
-        }*/
         bringInAttempts++;
-        //while ((distBetweenPoints<(routeDist/4)*.50 || distBetweenPoints>(routeDist/4)*1.50 || distBetweenPoints2<(routeDist/4)*.50 || distBetweenPoints2>(routeDist/4)*1.50)&& bringInAttempts<15)
-        //{//check distance to bottom right
-            upperLeftLong=getRight((routeDist/4)*Math.pow(.6, bringInAttempts), rightLong, distBetweenLng); //rightlong just for top left point
-            upperLeftLat=getUpper((routeDist/4)*Math.pow(.6, bringInAttempts), currentLocationLat);//lat only for top left point
-
-            /*try {
-                distBetweenPoints=checkDist(Double.toString(topLat),Double.toString(rightLong), Double.toString(upperLeftLat), Double.toString(upperLeftLong));
-                distBetweenPoints2=checkDist(Double.toString(upperLeftLat), Double.toString(upperLeftLong), Double.toString(currentLocationLat), Double.toString(currentLocationLong));
-
-            } catch (Exception e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }*/
-            bringInAttempts++;
-        //}
+        upperLeftLong=getRight((routeDist/4)*Math.pow(.6, bringInAttempts), rightLong, distBetweenLng); //rightlong just for top left point
+        upperLeftLat=getUpper((routeDist/4)*Math.pow(.6, bringInAttempts), currentLocationLat);//lat only for top left point
+        bringInAttempts++;
 
         String topLeft = Double.toString(upperLeftLat) + "," + Double.toString(upperLeftLong);
 
